@@ -114,7 +114,9 @@ exports.createTour = async (req,res)=>{
 catch(err){
     res.status(404).json({
         status:'Fail',
-        message: err
+     message: err.message,   
+       
+        
     })
 }
 
