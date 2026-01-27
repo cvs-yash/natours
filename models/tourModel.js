@@ -8,6 +8,7 @@ const tourSchema = new mongoose.Schema({
         trim: true
     },
     slug : String,
+    
     duration:{
         type: Number,
         required: [true, "A Tour must have duration"]
@@ -54,7 +55,12 @@ const tourSchema = new mongoose.Schema({
         select: false
     },
     startDates: [Date],
-},{
+    secretTour :{
+        type : Boolean,
+        default: false
+    },
+},
+{
     toJSON: {virtuals: true},
     toObject: {virtuals: true}
 })
@@ -76,6 +82,19 @@ tourSchema.pre('save',function(next){   //this function will be called before th
 
 // tourSchema.post('save',function(doc,next){
 //     console.log(doc)
+//     next()
+// })
+
+//QUERY MIDDLEWARE
+
+//query should execute if it starts with ^find
+tourSchema.pre(/^find/,function(next){     //mongodb return the  documents without secretTour
+    this.find({secretTour: {$ne: true}})
+    next()
+})
+
+// tourSchema.pre('findOne',function(next){    
+//     this.find({secretTour: {$ne: true}})
 //     next()
 // })
 

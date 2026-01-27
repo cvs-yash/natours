@@ -91,7 +91,7 @@ exports.getTourById = async (req,res)=>{
 
     }
     catch(err){
-        res.status(404).json({
+     res.status(404).json({
       status: 'fail',
       message: err.message
     });
