@@ -1,13 +1,11 @@
+
 const mongoose = require('mongoose')
 const dotenv = require('dotenv')
-
-
-
+dotenv.config({ path: './config.env' });
 const app = require('./app')
 
-dotenv.config({ path: './config.env' });
 
-
+console.log('NODE_ENV from env:', process.env.NODE_ENV);
 //console.log('DB = ', process.env.DATABASE);
 
 const DB = process.env.DATABASE.replace(
@@ -17,11 +15,7 @@ const DB = process.env.DATABASE.replace(
 
 
 mongoose
-  .connect(DB, { 
-      useNewUrlParser: true, 
-      useCreateIndex: true ,
-      useFindAndModify: false
-    })
+  .connect(DB)
   .then(() => console.log('DB connection successful!'))
   .catch(err => console.log('DB ERROR:', err));
 

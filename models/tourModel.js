@@ -108,10 +108,9 @@ tourSchema.pre('save',function(next){   //this function will be called before th
 //QUERY MIDDLEWARE
 
 //query should execute if it starts with ^find
-tourSchema.pre(/^find/,function(next){     //mongodb return the  documents without secretTour
-    this.find({secretTour: {$ne: true}})
-    next()
-})
+tourSchema.pre(/^find/, function() {
+    this.find({ secretTour: { $ne: true } });
+});
 
 // tourSchema.pre('findOne',function(next){    
 //     this.find({secretTour: {$ne: true}})

@@ -14,9 +14,9 @@ const app = express();
 console.log(process.env.NODE_ENV)
 
 //1)MIDDLEWARES
-if(process.env.NODE_ENV === 'development'){
 
-app.use(morgan('dev'))
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
 }
 
 
@@ -52,7 +52,6 @@ app.use((req,res,next)=>{
     // const err = new Error(`can't find ${req.originalUrl} on this server!`);
     // err.status = 'fail'
     // err.statusCode = 404
-
     next(new AppError(`can't find ${req.originalUrl} on this server!`,404))
 });
 
